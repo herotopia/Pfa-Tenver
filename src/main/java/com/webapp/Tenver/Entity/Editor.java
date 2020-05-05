@@ -12,7 +12,7 @@ public class Editor implements Serializable {
 
     public Editor() {
         super();
-    }
+    } 
 
     public User getEditorId() {
         return editorId;
