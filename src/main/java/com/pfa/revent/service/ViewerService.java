@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ViewerService implements ViewerServiceInterface{
     @Autowired
-    private ViewerRepository viewerRepository;
+    ViewerRepository viewerRepository;
 
     public Viewer save(Viewer viewer)
     {

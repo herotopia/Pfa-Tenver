@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ModeratorService implements ModeratorServiceInterface{
     @Autowired
-    private ModeratorRepository moderatorRepository;
+    ModeratorRepository moderatorRepository;
 
     public Moderator save(Moderator moderator)
     {

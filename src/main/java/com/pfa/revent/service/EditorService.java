@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class EditorService implements EditorServiceInterface{
     @Autowired
-    private EditorRepository editorRepository;
+    EditorRepository editorRepository;
 
     public Editor save(Editor editor)
     {

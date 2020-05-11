@@ -2,15 +2,13 @@ package com.pfa.revent.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
 /*@Table(name="U_EDITOR")
 @PrimaryKeyJoinColumn(name="U_ID")*/
 public class Editor /*extends User*/ implements Serializable {
-        @Id
+    @Id
     @Column(name = "EDITOR_ID")
     private long editorId;
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)

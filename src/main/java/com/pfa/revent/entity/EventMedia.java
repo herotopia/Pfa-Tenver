@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Table(name="EVENT_MEDIA")
 public class EventMedia implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long eventMediaId;
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn

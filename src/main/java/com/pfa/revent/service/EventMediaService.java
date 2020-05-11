@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class EventMediaService implements EventMediaServiceInterface{
     @Autowired
-    private EventMediaRepository eventMediaRepository;
+    EventMediaRepository eventMediaRepository;
 
     public EventMedia save(EventMedia eventMedia)
     {

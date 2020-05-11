@@ -9,39 +9,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserService implements UserServiceInterface{
+public class UserService implements UserServiceInterface {
     @Autowired
-    private UserRepository userRepository;
+    UserRepository usersRepository;
 
     public User save(User user)
     {
-        return userRepository.save(user);
+        return usersRepository.save(user);
     }
 
     public User update(long userId, User user)
     {
         if(userId!=user.getUserId())
             return null;
-        return userRepository.save(user);
+        return usersRepository.save(user);
     }
 
     public void remove(long userId, User user)
     {
         if(userId!=user.getUserId())
             return;
-        userRepository.delete(user);
+        usersRepository.delete(user);
     }
 
     public User getUser(long userId)
     {
-        return userRepository.findById(userId).orElse(null);
+        return usersRepository.findById(userId).orElse(null);
     }
 
     // edited
     public List<User> getAllUsers()
 
     {
-        return new ArrayList<>(userRepository.findAll());
+        return new ArrayList<>(usersRepository.findAll());
     }
     /*
     public List<Utilisateur> getAllUtilisaters()

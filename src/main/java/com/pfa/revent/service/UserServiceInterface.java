@@ -1,7 +1,6 @@
 package com.pfa.revent.service;
 
 import com.pfa.revent.entity.User;
-import com.pfa.revent.entity.User;
 
 import java.util.List;
 

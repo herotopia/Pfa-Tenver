@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Table(name="TAG")
 public class Tag implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long tagId;
     private String tag;
 

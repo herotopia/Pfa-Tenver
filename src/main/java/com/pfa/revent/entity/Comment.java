@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 @Table(name="COMMENT")
 public class Comment implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long commentId;
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "VIEWER_ID")

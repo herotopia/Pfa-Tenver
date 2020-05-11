@@ -9,7 +9,7 @@ import java.util.Collection;
 @Table(name="EVENT")
 public class Event implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long eventId;
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "ORGANIZER_ID")

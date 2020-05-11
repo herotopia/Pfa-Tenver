@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Table(name="PARTICIPATION")
 public class Participation implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long participationId;
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "VIEWER_ID")

@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ParticipationService implements ParticipationServiceInterface{
     @Autowired
-    private ParticipationRepository participationRepository;
+    ParticipationRepository participationRepository;
 
     public Participation save(Participation participation)
     {

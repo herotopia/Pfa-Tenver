@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Inheritance(strategy=InheritanceType.JOINED)*/
 public class User implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "USER_ID")
     private long userId;
     private String firstName;

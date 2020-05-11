@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class CommentService implements CommentServiceInterface{
     @Autowired
-    private CommentRepository commentRepository;
+    CommentRepository commentRepository;
 
     public Comment save(Comment comment)
     {

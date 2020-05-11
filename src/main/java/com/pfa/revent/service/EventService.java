@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class EventService implements EventServiceInterface{
     @Autowired
-    private EventRepository eventRepository;
+    EventRepository eventRepository;
 
     public Event save(Event event)
     {

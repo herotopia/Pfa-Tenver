@@ -1,6 +1,5 @@
 package com.pfa.revent.repository;
 
-import com.pfa.revent.entity.Comment;
 import com.pfa.revent.entity.Event;
 import com.pfa.revent.entity.Participation;
 import com.pfa.revent.entity.User;

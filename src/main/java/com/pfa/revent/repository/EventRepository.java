@@ -1,7 +1,6 @@
 package com.pfa.revent.repository;
 
 import com.pfa.revent.entity.Event;
-import com.pfa.revent.entity.Tag;
 import com.pfa.revent.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

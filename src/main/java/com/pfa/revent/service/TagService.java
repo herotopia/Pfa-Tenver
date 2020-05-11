@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class TagService implements TagServiceInterface{
     @Autowired
-    private TagRepository tagRepository;
+    TagRepository tagRepository;
 
     public Tag save(Tag tag)
     {

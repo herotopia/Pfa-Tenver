@@ -2,15 +2,13 @@ package com.pfa.revent.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
 /*@Table(name="U_VIEWER")
 @PrimaryKeyJoinColumn(name="U_ID")*/
 public class Viewer /*extends User*/ implements Serializable {
-        @Id
+    @Id
     @Column(name = "VIEWER_ID")
     private long viewerId;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "commentOwner")
