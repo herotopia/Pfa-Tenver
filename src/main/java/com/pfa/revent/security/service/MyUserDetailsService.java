@@ -1,8 +1,8 @@
 package com.pfa.revent.security.service;
 
-import com.pfa.revent.security.entity.MyUserSDetails;
-import com.pfa.revent.security.entity.UserS;
-import com.pfa.revent.security.repository.UserSRepository;
+import com.pfa.revent.security.entity.MyUserDetails;
+import com.pfa.revent.entity.User;
+import com.pfa.revent.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,16 +12,16 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class MyUserSDetailsService implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
     @Autowired
-    UserSRepository userRepository;
+    UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserS> user = userRepository.findByUsername(username);
+        Optional<User> user = userRepository.findByUsername(username);
 
         user.orElseThrow(() -> new UsernameNotFoundException("NotFound: " + username));
 
-        return user.map(MyUserSDetails::new).get();
+        return user.map(MyUserDetails::new).get();
     }
 }

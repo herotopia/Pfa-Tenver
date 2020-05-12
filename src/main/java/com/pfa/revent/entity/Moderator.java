@@ -7,9 +7,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
-/*@Table(name="U_MODERATOR")
-@PrimaryKeyJoinColumn(name="U_ID")*/
-public class Moderator /*extends User*/ implements Serializable {
+public class Moderator implements Serializable {
     @Id
     @Column(name = "MODERATOR_ID")
     private long moderatorId;
@@ -25,16 +23,6 @@ public class Moderator /*extends User*/ implements Serializable {
         this.editors = editors;
     }
 
-/*    public Moderator(String firstName, String lastName, String username, String password, String passwordConfirm, String email, int phoneNumber, Date birthdate, Timestamp registrationDate, byte[] avatarImage, Collection<Editor> editors) {
-        super(firstName, lastName, username, password, passwordConfirm, email, phoneNumber, birthdate, registrationDate, avatarImage);
-        this.editors = editors;
-    }*/
-
-/*    public Moderator(long userId, String firstName, String lastName, String username, String password, String passwordConfirm, String email, int phoneNumber, Date birthdate, Timestamp registrationDate, byte[] avatarImage, Collection<Editor> editors) {
-        super(userId, firstName, lastName, username, password, passwordConfirm, email, phoneNumber, birthdate, registrationDate, avatarImage);
-        this.moderatorId = userId;
-        this.editors = editors;
-    }*/
 
     public Moderator(long moderatorId, int maxEditors, Collection<Editor> editors) {
         this.moderatorId = moderatorId;

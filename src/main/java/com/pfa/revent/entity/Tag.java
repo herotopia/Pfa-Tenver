@@ -2,37 +2,49 @@ package com.pfa.revent.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @Table(name="TAG")
 public class Tag implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long tagId;
-    private String tag;
+    private long TagId;
+    private String Tag;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "usedTag",fetch = FetchType.LAZY)
+    private Collection<EventTag> eventTags;
 
     public Tag() {
         super();
     }
 
-    public Tag(long tagId, String tag) {
-        this.tagId = tagId;
-        this.tag = tag;
+    public Tag(long tagId, String tag, Collection<EventTag> eventTags) {
+        TagId = tagId;
+        Tag = tag;
+        this.eventTags = eventTags;
     }
 
     public long getTagId() {
-        return tagId;
+        return TagId;
     }
 
     public void setTagId(long tagId) {
-        this.tagId = tagId;
+        TagId = tagId;
     }
 
     public String getTag() {
-        return tag;
+        return Tag;
     }
 
     public void setTag(String tag) {
-        this.tag = tag;
+        Tag = tag;
+    }
+
+    public Collection<EventTag> getEventTags() {
+        return eventTags;
+    }
+
+    public void setEventTags(Collection<EventTag> eventTags) {
+        this.eventTags = eventTags;
     }
 }

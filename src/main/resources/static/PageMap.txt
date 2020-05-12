@@ -1,0 +1,101 @@
+localhost:8080
+/
+    /home
+    /about
+    /contact
+    /login
+    /logout
+    /register
+    /user/{userId}
+        /user/{userId}/profile (view profile) (update button leads to /update)
+            /user/{userId}/profile/update (update profile info form)
+            /user/{userId}/profile/update/uploadFile (upload single form) (avatar image)
+            /user/{userId}/profile/upgrade (upgrade profile status Viewer->Editor->Moderator)
+
+        /user/{userId}/view
+        /user/{userId}/view/profile
+            /user/{userId}/view/profile/participations
+                /user/{userId}/view/profile/participations?page={page} (browse x page of participated events)
+                /user/{userId}/view/profile/participations?type={type} (browse events with x participation type)
+            /user/{userId}/view/events
+                /user/{userId}/view/events?page={page} (browse x page of events)
+                /user/{userId}/view/events?organizerUsername={username} (browse events by organizer) (custom Query)
+                /user/{userId}/view/events?tag={tag}  (browse events with tag x)
+                /user/{userId}/view/events?type={type}  (browse events with type x)
+                /user/{userId}/view/events?city={city} (browse events in city x)
+                /user/{userId}/view/events?country={country} (browse events in country x)
+                /user/{userId}/view/events?title={title} (browse events with title LIKE x)
+                /user/{userId}/view/events?start={start}&end={end} (browse events happening between 'start' and 'end')
+                /user/{userId}/view/events/{eventId} (Particular event page)
+
+        /user/{userId}/edit (event creation description & menu ?)
+            /user/{userId}/edit/create (create event form)
+            /user/{userId}/edit/create/{eventId}/uploadFile (upload single form) (thumbnail)
+            /user/{userId}/edit/create/{eventId}/uploadMultipleFiles (upload multiple form) (media for the event)
+            /user/{userId}/edit/profile
+                /user/{userId}/edit/profile/myEvents
+                    /user/{userId}/edit/profile/myEvents?page={page} (browse x page of created events)
+                    /user/{userId}/edit/profile/myEvents?title={title} (browse created events with title LIKE x)
+                    /user/{userId}/edit/profile/myEvents/{eventId} (Particular created event page) (list of participants.. etc)
+
+        /user/{userId}/manage (management description & menu ?)
+            /user/{userId}/manage/profile
+                /user/{userId}/manage/profile/myEditors (browse editors)
+                    /user/{userId}/manage/profile/myEditors?page={page} (browse x page of editors) (clicking an editor forwards you to edit/profile)
+                    /user/{userId}/manage/profile/myEditors?username={username} (browse editors by username)
+                    /user/{userId}/manage/profile/myEditors?Id={userId}
+                /user/{userId}/manage/profile/create (editor creation form)
+
+    /api
+        /api/users (displays all users) (displays user given param)
+            /api/users/userId?userId={userId}
+            /api/users/username?username={username}
+            /api/users/roles?roles={roles}
+            /api/users/permission?permission={permission} (optional)
+        POST, value="/api/user
+        PUT, value="/api/User/{userId}
+        DELETE, value="/api/user/{userId}
+
+
+        /api/events
+            /api/events?eventId={eventId}
+            /api/events?organizerId={userId}
+            /api/events?organizerUsername={Username}
+            /api/events?title={title}
+            /api/events?tag={tag}
+            /api/events?type={type}
+            /api/events?city={city}
+            /api/events?country={country}
+            /api/events?start={start}&end={end}
+
+        /api/comments
+            /api/comments?commentOwnerId={userId}
+            /api/comments?start={start}&end={end}
+            /api/comments?commentedEventId={eventId}
+            /api/comments?start={start}&end={end}
+
+        /api/media
+            /api/media?mediatedEvent={eventId}
+
+        /api/participations
+            /api/participations?participationId={participationId}
+            /api/participations?participationType={type}
+            /api/participations?participant={userId}
+            /api/participations?participatedEvent={eventId}
+
+        /api/tags
+            /api/tags?tagId={tagId}
+
+        /api/eventTag
+            /api/eventTag?taggedEvent={eventId}
+            /api/eventTag?usedTag={tagId}
+
+        /api/Viewers
+            /api/viewers?viewerId={userId}
+
+        /api/editors
+            /api/editors?editorId={userId}
+            /api/editors?parentModerator={userId}
+
+        /api/moderators
+            /api/moderators?moderatorId={userId}

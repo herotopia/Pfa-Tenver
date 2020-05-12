@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class ViewerService implements ViewerServiceInterface{
+
     @Autowired
     ViewerRepository viewerRepository;
 
@@ -37,18 +38,9 @@ public class ViewerService implements ViewerServiceInterface{
         return viewerRepository.findById(viewerId).orElse(null);
     }
 
-    // edited
     public List<Viewer> getAllViewers()
 
     {
         return new ArrayList<>(viewerRepository.findAll());
     }
-    /*
-    public List<Viewer> getAllViewers()
-
-    {
-        List<Viewer> viewers = new ArrayList<>();
-        ViewerRepository.findAll().forEach(viewers::add);
-        return viewers;
-    }*/
 }

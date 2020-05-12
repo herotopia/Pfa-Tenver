@@ -9,11 +9,13 @@ public class EventMedia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long eventMediaId;
+
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn
     private Event mediatedEvent;
-    private byte[] eventMedia;
+
     private String Description;
+    private byte[] eventMedia;
 
     public EventMedia() {
         super();

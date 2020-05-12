@@ -1,7 +1,9 @@
 package com.pfa.revent.security.entity;
 
+import com.pfa.revent.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
@@ -9,21 +11,21 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MyUserSDetails implements UserDetails {
+public class MyUserDetails implements UserDetails {
 
     private String username;
     private String password;
     private boolean active;
     private List<GrantedAuthority> authorities;
 
-    public MyUserSDetails() {
+    public MyUserDetails() {
     }
 
-    public MyUserSDetails(UserS userS){
-        this.username = userS.getUsername();
-        this.password = userS.getPassword();
-        this.active = userS.isActive();
-        this.authorities = Arrays.stream(userS.getRoles().split(","))
+    public MyUserDetails(User user){
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.active = user.isActive();
+        this.authorities = Arrays.stream(user.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 

@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserServiceInterface {
+
     @Autowired
     UserRepository usersRepository;
 
@@ -22,6 +24,19 @@ public class UserService implements UserServiceInterface {
     {
         if(userId!=user.getUserId())
             return null;
+        /*if(user.getAvatarImage() == null){
+            user.setAvatarImage(getUser(userId).getAvatarImage());
+        }*/
+        return usersRepository.save(user);
+    }
+
+    public User update(String username, User user)
+    {
+        if(!username.toLowerCase().equals(user.getUsername().toLowerCase()))
+            return null;
+        /*if(user.getAvatarImage() == null){
+            user.setAvatarImage(getUser(userId).getAvatarImage());
+        }*/
         return usersRepository.save(user);
     }
 
@@ -32,23 +47,32 @@ public class UserService implements UserServiceInterface {
         usersRepository.delete(user);
     }
 
-    public User getUser(long userId)
+    public List<User> getUserById(Optional<Long> userId)
     {
-        return usersRepository.findById(userId).orElse(null);
+        List<User> users = new ArrayList<User>();
+        if (!userId.isPresent()) {
+            return new ArrayList<>(usersRepository.findAll());
+        }
+        else {
+            Optional<User> optionalUser = usersRepository.findById(userId.get());
+            optionalUser.ifPresent(users::add);
+            return users;
+        }
+    }
+
+    public List<User> getUserByUsername(Optional<String> username)
+    {
+        return usersRepository.queryFindByUsername(username.orElse("_"));
+    }
+
+    public List<User> getUserByRoles(Optional<String> roles)
+    {
+        return usersRepository.findByRoles(roles.orElse("_"));
     }
 
     // edited
     public List<User> getAllUsers()
-
     {
         return new ArrayList<>(usersRepository.findAll());
     }
-    /*
-    public List<Utilisateur> getAllUtilisaters()
-
-    {
-        List<User> users = new ArrayList<>();
-        UserRepository.findAll().forEach(users::add);
-        return users;
-    }*/
 }

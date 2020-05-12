@@ -1,15 +1,15 @@
 package com.pfa.revent.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
-/*@Table(name = "USER")
-@Inheritance(strategy=InheritanceType.JOINED)*/
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,50 +17,47 @@ public class User implements Serializable {
     private long userId;
     private String firstName;
     private String lastName;
-    private String username;
     //pattern
     private String password;
     @Transient
     private String passwordConfirm;
-    //pattern
+    @Email
+    @Column(unique = true)
     private String email;
 
-    private int phoneNumber;
-
     private Date birthdate;
+    @CreationTimestamp
     private Timestamp registrationDate;
 
     private byte[] avatarImage;
+
+    //Spring security//////////////////////////////////
+    @Column(unique = true)
+    private String username;
+    private String userAccessPrivilege;
+    private static boolean active = true;
+    private String roles;
+    ///////////////////////////////////////////////////
 
     public User() {
         super();
     }
 
-    public User(String firstName, String lastName, String username, String password, String passwordConfirm, String email, int phoneNumber, Date birthdate, Timestamp registrationDate, byte[] avatarImage) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.passwordConfirm = passwordConfirm;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.birthdate = birthdate;
-        this.registrationDate = registrationDate;
-        this.avatarImage = avatarImage;
-    }
-
-    public User(long userId, String firstName, String lastName, String username, String password, String passwordConfirm, String email, int phoneNumber, Date birthdate, Timestamp registrationDate, byte[] avatarImage) {
+    //Global constructor
+    public User(long userId, String firstName, String lastName, String password, String passwordConfirm, String email, Date birthdate, Timestamp registrationDate, byte[] avatarImage, String username, String userAccessPrivilege, boolean active, String roles) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
         this.password = password;
         this.passwordConfirm = passwordConfirm;
         this.email = email;
-        this.phoneNumber = phoneNumber;
         this.birthdate = birthdate;
         this.registrationDate = registrationDate;
         this.avatarImage = avatarImage;
+        this.username = username;
+        this.userAccessPrivilege = userAccessPrivilege;
+        this.active = active;
+        this.roles = roles;
     }
 
     public long getUserId() {
@@ -87,14 +84,6 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -119,14 +108,6 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public Date getBirthdate() {
         return birthdate;
     }
@@ -149,5 +130,37 @@ public class User implements Serializable {
 
     public void setAvatarImage(byte[] avatarImage) {
         this.avatarImage = avatarImage;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUserAccessPrivilege() {
+        return userAccessPrivilege;
+    }
+
+    public void setUserAccessPrivilege(String userAccessPrivilege) {
+        this.userAccessPrivilege = userAccessPrivilege;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 }

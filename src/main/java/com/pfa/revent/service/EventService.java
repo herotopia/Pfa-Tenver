@@ -43,12 +43,5 @@ public class EventService implements EventServiceInterface{
     {
         return new ArrayList<>(eventRepository.findAll());
     }
-    /*
-    public List<Utilisateur> getAllUtilisaters()
 
-    {
-        List<Event> events = new ArrayList<>();
-        EventRepository.findAll().forEach(events::add);
-        return events;
-    }*/
 }

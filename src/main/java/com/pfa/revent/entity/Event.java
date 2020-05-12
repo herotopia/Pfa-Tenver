@@ -22,9 +22,10 @@ public class Event implements Serializable {
     private String region;
     private int zipCode;
     private String street;
-    private String otherInformation;
+    private String otherAddressInformation;
     private String description;
     private String status;
+    private long thumbnailMediaId;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "mediatedEvent",fetch = FetchType.LAZY)
     private Collection<EventMedia> eventMediaCollection;
@@ -32,17 +33,14 @@ public class Event implements Serializable {
     private Collection<Participation> participations;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "commentedEvent",fetch = FetchType.LAZY)
     private Collection<Comment> comments;
-    @ManyToMany(targetEntity = Tag.class, cascade = { CascadeType.ALL })
-    @JoinTable(name = "EVENT_TAG",
-            joinColumns = { @JoinColumn(name = "EVENT_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "TAG_ID") })
-    private Collection<Tag> tags;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "taggedEvent",fetch = FetchType.LAZY)
+    private Collection<EventTag> eventTags;
 
     public Event() {
         super();
     }
 
-    public Event(String eventTitle, String eventType, Date startDate, Date endDate, String city, String region, int zipCode, String street, String otherInformation, String description, String status) {
+    public Event(String eventTitle, String eventType, Date startDate, Date endDate, String city, String region, int zipCode, String street, String otherAddressInformation, String description) {
         this.eventTitle = eventTitle;
         this.eventType = eventType;
         this.startDate = startDate;
@@ -51,12 +49,11 @@ public class Event implements Serializable {
         this.region = region;
         this.zipCode = zipCode;
         this.street = street;
-        this.otherInformation = otherInformation;
+        this.otherAddressInformation = otherAddressInformation;
         this.description = description;
-        this.status = status;
     }
 
-    public Event(long eventId, Editor organizer, String eventTitle, String eventType, Date startDate, Date endDate, String city, String region, int zipCode, String street, String otherInformation, String description, String status) {
+    public Event(long eventId, Editor organizer, String eventTitle, String eventType, Date startDate, Date endDate, String city, String region, int zipCode, String street, String otherAddressInformation, String description, String status, long thumbnailMediaId, Collection<EventMedia> eventMediaCollection, Collection<Participation> participations, Collection<Comment> comments, Collection<EventTag> eventTags) {
         this.eventId = eventId;
         this.organizer = organizer;
         this.eventTitle = eventTitle;
@@ -67,29 +64,14 @@ public class Event implements Serializable {
         this.region = region;
         this.zipCode = zipCode;
         this.street = street;
-        this.otherInformation = otherInformation;
+        this.otherAddressInformation = otherAddressInformation;
         this.description = description;
         this.status = status;
-    }
-
-    public Event(long eventId, Editor organizer, String eventTitle, String eventType, Date startDate, Date endDate, String city, String region, int zipCode, String street, String otherInformation, String description, String status, Collection<EventMedia> eventMediaCollection, Collection<Participation> participations, Collection<Comment> comments, Collection<Tag> tags) {
-        this.eventId = eventId;
-        this.organizer = organizer;
-        this.eventTitle = eventTitle;
-        this.eventType = eventType;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.city = city;
-        this.region = region;
-        this.zipCode = zipCode;
-        this.street = street;
-        this.otherInformation = otherInformation;
-        this.description = description;
-        this.status = status;
+        this.thumbnailMediaId = thumbnailMediaId;
         this.eventMediaCollection = eventMediaCollection;
         this.participations = participations;
         this.comments = comments;
-        this.tags = tags;
+        this.eventTags = eventTags;
     }
 
     public long getEventId() {
@@ -172,12 +154,12 @@ public class Event implements Serializable {
         this.street = street;
     }
 
-    public String getOtherInformation() {
-        return otherInformation;
+    public String getOtherAddressInformation() {
+        return otherAddressInformation;
     }
 
-    public void setOtherInformation(String otherInformation) {
-        this.otherInformation = otherInformation;
+    public void setOtherAddressInformation(String otherAddressInformation) {
+        this.otherAddressInformation = otherAddressInformation;
     }
 
     public String getDescription() {
@@ -194,6 +176,14 @@ public class Event implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public long getThumbnailMediaId() {
+        return thumbnailMediaId;
+    }
+
+    public void setThumbnailMediaId(long thumbnailMediaId) {
+        this.thumbnailMediaId = thumbnailMediaId;
     }
 
     public Collection<EventMedia> getEventMediaCollection() {
@@ -220,11 +210,11 @@ public class Event implements Serializable {
         this.comments = comments;
     }
 
-    public Collection<Tag> getTags() {
-        return tags;
+    public Collection<EventTag> getEventTags() {
+        return eventTags;
     }
 
-    public void setTags(Collection<Tag> tags) {
-        this.tags = tags;
+    public void setEventTags(Collection<EventTag> eventTags) {
+        this.eventTags = eventTags;
     }
 }

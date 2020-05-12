@@ -25,31 +25,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
-
-        /*       auth.inMemoryAuthentication()
-                .withUser("herotopia")
-                .password("azerty")
-                .roles("ADMIN")
-                .and()
-                .withUser("viewer")
-                .password("azerty")
-                .roles("VIEWER")
-                .and()
-                .withUser("editor")
-                .password("azerty")
-                .roles("EDITOR")
-                .and()
-                .withUser("moderator")
-                .password("azerty")
-                .roles("MODERATOR");*/
-
     }
 
     @Bean
     public PasswordEncoder getPaswordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
-        //return NoOpPasswordEncoder.getInstance();
+        /*BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;*/
+        return NoOpPasswordEncoder.getInstance();
     }
 
     @Override
@@ -97,17 +79,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").hasRole("ADMIN")
                 .and().formLogin();*/
     }
-
-/*    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(userDetailsService);
-        auth.setPasswordEncoder(getPaswordEncoder());
-        return auth;
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
-    }*/
 }
